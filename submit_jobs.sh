@@ -2,7 +2,7 @@
 #SBATCH --job-name ="mbon_aquamaps"
 #SBATCH --nodes=1
 #SBATCH --TIME=3:00:00
-#SBATCH --array=0-199
+#SBATCH --array=0-2
 ## Can submit up to 10,000 jobs at once, but only 512 will run concurrently
 ## ============================================================================
 ## This script is used to submit a set of jobs (defined by array above)
@@ -29,7 +29,7 @@ species_name=${species_name_arr[$SLURM_ARRAY_TASK_ID]}
 expected_output_filepath=$DATA_DIR/$species_name.filetype  # TODO
 if [ ! -f $image2 ]; then  # if output file DNE
     module add apps/R/???  # TODO: find an R module?
-    Rscript /path/to/bens_script.R $species_name  # TODO: create this script
+    Rscript $CODE_REPO_DIR/test_script.R $species_name  # TODO: create this script
 fi
 
 #### Calculate Total Time
